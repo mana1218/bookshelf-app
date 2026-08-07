@@ -11,7 +11,7 @@ use Illuminate\View\View;
 
 class BookController extends Controller
 {
-    //test
+    //test2
     public function index(): View
     {
         $books = Book::with('genres')->oldest()->paginate(10);
