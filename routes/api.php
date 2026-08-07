@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Api\V1\BookController;
+use App\Http\Controllers\Api\V1\GenreController;
+use App\Http\Controllers\Api\V1\ReviewController;
+use App\Http\Controllers\Api\V1\RankingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +18,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('v1')->group(function () {
+    Route::get('books/isbn/{isbn}', [BookController::class, 'isbn']);
+    Route::apiResource('books', BookController::class);
+    Route::apiResource('genres', GenreController::class);
+    Route::apiResource('reviews', ReviewController::class)->only(['update', 'destroy']);
+    Route::post('books/{book}/reviews', [ReviewController::class, 'store']);
+    Route::get('ranking', [RankingController::class, 'index']);
 });

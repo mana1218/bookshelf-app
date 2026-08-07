@@ -1,0 +1,41 @@
+<?php
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class StoreReadingPlanRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     */
+    public function rules(): array
+    {
+        return [
+            'book_id' => ['required', 'exists:books,id'],
+            'due_date' => ['required', 'after_or_equal:today'],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'book_id.required' => '書籍を選択してください。',
+            'book_id.exists' => '選択した書籍が存在しません。',
+
+            'due_date.required' => '期日を入力してください。',
+            'due_date.date' => '正しい日付を入力してください。',
+            'due_date.after_or_equal' => '期日は今日以降の日付を指定してください。',
+        ];
+    }
+}
