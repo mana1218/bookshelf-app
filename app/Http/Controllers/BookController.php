@@ -33,7 +33,11 @@ class BookController extends Controller
             });
         }
 
+<<<<<<< HEAD
         $sort = $request->input('sort', 'latest');
+=======
+        $sort = $request->input('sort', 'newest');
+>>>>>>> origin/main
 
         switch ($sort) {
             case 'oldest':
@@ -54,7 +58,11 @@ class BookController extends Controller
                 break;
         }
 
+<<<<<<< HEAD
         $books = $query->paginate(10);
+=======
+        $books = $query->paginate(10)->withQueryString();
+>>>>>>> origin/main
 
         $genres = Genre::orderBy('name')->get();
 
