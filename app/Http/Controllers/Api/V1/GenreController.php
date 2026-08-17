@@ -9,6 +9,7 @@ use App\Http\Resources\Api\V1\GenreResource;
 use App\Http\Requests\Api\V1\StoreGenreRequest;
 use App\Http\Requests\Api\V1\UpdateGenreRequest;
 
+
 class GenreController extends Controller
 {
     public function index()
