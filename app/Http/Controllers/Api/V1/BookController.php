@@ -33,7 +33,7 @@ class BookController extends Controller
             });
         }
 
-        $sort = $request->input('sort', 'latest');
+        $sort = $request->input('sort', 'newest');
 
         switch ($sort) {
             case 'oldest':
@@ -54,7 +54,7 @@ class BookController extends Controller
                 break;
         }
 
-        $books = $query->paginate(10);
+        $books = $query->paginate(10)->withQueryString();
 
         return BookResource::collection($books);
     }
