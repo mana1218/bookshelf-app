@@ -64,7 +64,7 @@ class BookController extends Controller
         $validated = $request->validated();
 
         $book = Book::create([
-            'user_id' => 1,
+            'user_id' => $request->user()->id,
             'title' => $validated['title'],
             'author' => $validated['author'],
             'isbn' => $validated['isbn'],
@@ -89,6 +89,8 @@ class BookController extends Controller
 
     public function update(UpdateBookRequest $request, Book $book)
     {
+        $this->authorize('update', $book);
+
         $validated = $request->validated();
 
         $book->update([
@@ -107,6 +109,8 @@ class BookController extends Controller
 
     public function destroy(Book $book)
     {
+        $this->authorize('delete', $book);
+
         $book->delete();
 
         return response()->json(null, 204);
