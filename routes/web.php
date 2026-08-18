@@ -26,6 +26,7 @@ Route::get('/', [BookController::class, 'index'])->name('home');
 Route::get('/ranking', [RankingController::class, 'index'])->name('ranking.index');
 Route::middleware('auth')->group(function () {
     Route::resource('genres', GenreController::class);
+    Route::get('/books/isbn/{isbn}', [BookController::class, 'isbn']);
     Route::resource('books', BookController::class)->except(['index', 'show']);
     Route::post('/books/{book}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
     Route::resource('reviews', ReviewController::class)->except(['index', 'show', 'create', 'store']);

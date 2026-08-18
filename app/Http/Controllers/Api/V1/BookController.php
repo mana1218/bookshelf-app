@@ -145,6 +145,7 @@ class BookController extends Controller
         $book = $data['items'][0]['volumeInfo'];
 
         return response()->json([
+            'isbn' => $isbn,
             'title' => $book['title'] ?? null,
             'author' => $book['authors'][0] ?? null,
             'published_date' => $book['publishedDate'] ?? null,
