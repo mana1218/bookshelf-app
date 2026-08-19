@@ -16,7 +16,7 @@ class ReportController extends Controller
             ->count();
 
         $booksRead = auth()->user()
-            ->readingPlans()
+            ->plans()
             ->where('status', 'completed')
             ->distinct('book_id')
             ->count('book_id');
