@@ -2,25 +2,32 @@
 
 namespace App\Models;
 
+use App\Enums\PlanStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
 
-class ReadingPlan extends Model
+class Plan extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'user_id',
         'book_id',
-        'due_date',
+        'target_date',
         'status'
     ];
 
     protected $casts = [
-        'due_date' => 'date',
-        'status' => ReadingPlanStatus::class
+        'target_date' => 'date',
+        'status' => PlanStatus::class
     ];
+
+    public function isOverdue(): bool
+    {
+        return $this->status !== PlanStatus::Completed
+            && $this->target_date->isPast();
+    }
 
     public function user(): BelongsTo
     {
