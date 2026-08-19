@@ -6,7 +6,7 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\RankingController;
 use App\Http\Controllers\ReviewLikeController;
-use App\Http\Controllers\ReadingPlanController;
+use App\Http\Controllers\PlanController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Route;
@@ -33,7 +33,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.index');
     Route::post('/books/{book}/favorites', [FavoriteController::class, 'toggle'])->name('favorites.toggle');
     Route::post('/reviews/{review}/like', [ReviewLikeController::class, 'toggle'])->name('reviews.like');
-    Route::resource('reading-plans', ReadingPlanController::class)->except(['show']);
+    Route::resource('reading-plans', PlanController::class)->parameters(['reading-plans' => 'plan'])->except(['show']);
+    Route::post('/reading-plans/{plan}/complete', [PlanController::class, 'complete'])->name('reading-plans.complete');
     Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
     Route::post('/notifications/{id}/read', [NotificationController::class, 'read'])->name('notifications.read');

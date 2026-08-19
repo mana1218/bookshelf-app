@@ -12,11 +12,15 @@
                     <label for="status" class="text-sm text-gray-700">状態:</label>
                     <select name="status" id="status" onchange="this.form.submit()" class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm">
                         <option value="">すべて</option>
-                        @foreach (\App\Enums\ReadingPlanStatus::cases() as $statusOption)
+                        @foreach (\App\Enums\PlanStatus::cases() as $statusOption)
                             <option value="{{ $statusOption->value }}" @selected($currentStatus === $statusOption->value)>
                                 {{ $statusOption->label() }}
                             </option>
                         @endforeach
+                        
+                        <option value="overdue" @selected($currentStatus === 'overdue')>
+                            期限切れ
+                        </option>
                     </select>
                 </form>
                 <a href="{{ route('reading-plans.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
@@ -32,7 +36,7 @@
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    @if($readingPlans->isEmpty())
+                    @if($plans->isEmpty())
                         <p class="text-gray-500">該当する読書計画はありません。</p>
                     @else
                         <table class="min-w-full divide-y divide-gray-200">
@@ -46,7 +50,7 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                                @foreach($readingPlans as $plan)
+                                @foreach($plans as $plan)
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <a href="{{ route('books.show', $plan->book) }}" class="text-blue-600 hover:text-blue-800">
@@ -60,12 +64,18 @@
                                             {{ $plan->completed_at?->format('Y-m-d') ?? '-' }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm">
-                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $plan->status->badgeClass() }}">
-                                                {{ $plan->status->label() }}
-                                            </span>
+                                            @if ($plan->isOverdue())
+                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                                    期限切れ
+                                                </span>
+                                            @else
+                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $plan->status->badgeClass() }}">
+                                                    {{ $plan->status->label() }}
+                                                </span>
+                                            @endif
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
-                                            @if($plan->status !== \App\Enums\ReadingPlanStatus::Completed)
+                                            @if($plan->status !== \App\Enums\PlanStatus::Completed)
                                                 <form action="{{ route('reading-plans.complete', $plan) }}" method="POST" class="inline" novalidate>
                                                     @csrf
                                                     <button type="submit" class="text-green-600 hover:text-green-900">読了する</button>

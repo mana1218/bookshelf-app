@@ -41,9 +41,9 @@ class Book extends Model
         return $this->hasMany(Review::class);
     }
 
-    public function readingPlans(): HasMany
+    public function plans(): HasMany
     {
-        return $this->hasMany(ReadingPlan::class);
+        return $this->hasMany(Plan::class);
     }
 
     public function favoriteBooks(): BelongsToMany
