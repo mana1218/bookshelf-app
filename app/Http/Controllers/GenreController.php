@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreGenreRequest;
 use App\Http\Requests\UpdateGenreRequest;
 use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class GenreController extends Controller
 {

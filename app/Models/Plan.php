@@ -26,7 +26,7 @@ class Plan extends Model
     public function isOverdue(): bool
     {
         return $this->status !== PlanStatus::Completed
-            && $this->target_date->isPast();
+            && $this->target_date->isBefore(today());
     }
 
     public function user(): BelongsTo
