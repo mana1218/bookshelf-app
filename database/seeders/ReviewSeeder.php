@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\User;
+use App\Models\Book;
 use App\Models\Review;
 
 class ReviewSeeder extends Seeder
@@ -13,221 +15,30 @@ class ReviewSeeder extends Seeder
      */
     public function run(): void
     {
-        $reviews = [
-            [
-                'user_id' => 1,
-                'book_id' => 1,
-                'rating' => 3,
-                'comment' => 'とても面白いです。',
-            ],
-            [
-                'user_id' => 2,
-                'book_id' => 2,
-                'rating' => 4,
-                'comment' => '読みやすかったです。',
-            ],
-            [
-                'user_id' => 3,
-                'book_id' => 3,
-                'rating' => 5,
-                'comment' => '名作です。',
-            ],
-            [
-                'user_id' => 4,
-                'book_id' => 4,
-                'rating' => 3,
-                'comment' => '他の人にもおすすめしたいです。',
-            ],
-            [
-                'user_id' => 5,
-                'book_id' => 5,
-                'rating' => 4,
-                'comment' => 'とても面白いです。',
-            ],
-            [
-                'user_id' => 1,
-                'book_id' => 6,
-                'rating' => 5,
-                'comment' => '読みやすかったです。',
-            ],
-            [
-                'user_id' => 2,
-                'book_id' => 7,
-                'rating' => 3,
-                'comment' => '名作です。',
-            ],
-            [
-                'user_id' => 3,
-                'book_id' => 8,
-                'rating' => 4,
-                'comment' => '他の人にもおすすめしたいです。',
-            ],
-            [
-                'user_id' => 4,
-                'book_id' => 9,
-                'rating' => 5,
-                'comment' => 'とても面白いです。',
-            ],
-            [
-                'user_id' => 5,
-                'book_id' => 10,
-                'rating' => 3,
-                'comment' => '読みやすかったです。',
-            ],
-            [
-                'user_id' => 1,
-                'book_id' => 11,
-                'rating' => 4,
-                'comment' => '名作です。',
-            ],
-            [
-                'user_id' => 2,
-                'book_id' => 1,
-                'rating' => 5,
-                'comment' => '他の人にもおすすめしたいです。',
-            ],
-            [
-                'user_id' => 3,
-                'book_id' => 2,
-                'rating' => 3,
-                'comment' => 'とても面白いです。',
-            ],
-            [
-                'user_id' => 4,
-                'book_id' => 3,
-                'rating' => 4,
-                'comment' => '読みやすかったです。',
-            ],
-            [
-                'user_id' => 5,
-                'book_id' => 4,
-                'rating' => 5,
-                'comment' => '名作です。',
-            ],
-            [
-                'user_id' => 1,
-                'book_id' => 5,
-                'rating' => 3,
-                'comment' => '他の人にもおすすめしたいです。',
-            ],
-            [
-                'user_id' => 2,
-                'book_id' => 6,
-                'rating' => 4,
-                'comment' => 'とても面白いです。',
-            ],
-            [
-                'user_id' => 3,
-                'book_id' => 7,
-                'rating' => 5,
-                'comment' => '読みやすかったです。',
-            ],
-            [
-                'user_id' => 4,
-                'book_id' => 8,
-                'rating' => 3,
-                'comment' => '名作です。',
-            ],
-            [
-                'user_id' => 5,
-                'book_id' => 9,
-                'rating' => 4,
-                'comment' => '他の人にもおすすめしたいです。',
-            ],
-            [
-                'user_id' => 1,
-                'book_id' => 10,
-                'rating' => 5,
-                'comment' => 'とても面白いです。',
-            ],
-            [
-                'user_id' => 2,
-                'book_id' => 11,
-                'rating' => 3,
-                'comment' => '読みやすかったです。',
-            ],
-            [
-                'user_id' => 3,
-                'book_id' => 1,
-                'rating' => 4,
-                'comment' => '名作です。',
-            ],
-            [
-                'user_id' => 4,
-                'book_id' => 2,
-                'rating' => 5,
-                'comment' => '他の人にもおすすめしたいです。',
-            ],
-            [
-                'user_id' => 5,
-                'book_id' => 3,
-                'rating' => 3,
-                'comment' => 'とても面白いです。',
-            ],
-            [
-                'user_id' => 1,
-                'book_id' => 4,
-                'rating' => 4,
-                'comment' => '読みやすかったです。',
-            ],
-            [
-                'user_id' => 2,
-                'book_id' => 5,
-                'rating' => 5,
-                'comment' => '名作です。',
-            ],
-            [
-                'user_id' => 3,
-                'book_id' => 6,
-                'rating' => 3,
-                'comment' => '他の人にもおすすめしたいです。',
-            ],
-            [
-                'user_id' => 4,
-                'book_id' => 7,
-                'rating' => 4,
-                'comment' => 'とても面白いです。',
-            ],
-            [
-                'user_id' => 5,
-                'book_id' => 8,
-                'rating' => 5,
-                'comment' => '読みやすかったです。',
-            ],
-            [
-                'user_id' => 1,
-                'book_id' => 9,
-                'rating' => 3,
-                'comment' => '名作です。',
-            ],
-            [
-                'user_id' => 2,
-                'book_id' => 10,
-                'rating' => 4,
-                'comment' => '他の人にもおすすめしたいです。',
-            ],
-            [
-                'user_id' => 3,
-                'book_id' => 11,
-                'rating' => 5,
-                'comment' => 'とても面白いです。',
-            ],
-            [
-                'user_id' => 4,
-                'book_id' => 1,
-                'rating' => 3,
-                'comment' => '読みやすかったです。',
-            ],
-            [
-                'user_id' => 5,
-                'book_id' => 2,
-                'rating' => 4,
-                'comment' => '名作です。',
-            ],
+        $users = User::all();
+        $books = Book::all();
+
+        $comments = [
+            1 => 'あまりおすすめしません。',
+            2 => '少し物足りなく感じました。',
+            3 => '面白いです。',
+            4 => '読みやすかったです。',
+            5 => '名作でした！',
         ];
 
-        foreach ($reviews as $review) {
-            Review::create($review);
+        foreach ($books as $book) {
+            $count = rand(2, 4);
+
+            for ($i = 0; $i < $count; $i++) {
+                $rating = rand(1, 5);
+
+                Review::create([
+                    'user_id' => $users->random()->id,
+                    'book_id' => $book->id,
+                    'rating' => $rating,
+                    'comment' => $comments[$rating],
+                ]);
+            }
         }
     }
 }
