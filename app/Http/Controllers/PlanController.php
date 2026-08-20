@@ -46,6 +46,19 @@ class PlanController extends Controller
     {
         $validated = $request->validated();
 
+            $exists = Plan::where('user_id', auth()->id())
+                ->where('book_id', $validated['book_id'])
+                ->where('status', '!=', PlanStatus::Completed)
+                ->whereDate('target_date', '>=', today())
+                ->exists();
+        
+            if ($exists) {
+                return back()->withErrors([
+                    'book_id' => 'この本は現在、読書計画が有効です。',
+                ])->withInput();
+            }
+
+
         Plan::create([
             'user_id' => auth()->id(),
             'book_id' => $validated['book_id'],
