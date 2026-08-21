@@ -84,7 +84,7 @@ class BookController extends Controller
 
         $book->genres()->sync($validated['genres'] ?? []);
 
-        return redirect()->route('books.index', $book);
+        return redirect()->route('books.index');
     }
 
     public function show(Book $book): View
@@ -120,7 +120,7 @@ class BookController extends Controller
 
         $book->genres()->sync($validated['genres'] ?? []);
 
-        return redirect()->route('books.index', $book);
+        return redirect()->route('books.index');
     }
 
     public function destroy(Book $book): RedirectResponse
@@ -129,7 +129,7 @@ class BookController extends Controller
         
         $book->delete();
 
-        return redirect()->route('books.index', $book);
+        return redirect()->route('books.index');
     }
 
     public function isbn($isbn)

@@ -51,13 +51,13 @@ class GenreController extends Controller
 
         $genre->update($validated);
 
-        return redirect()->route('genres.index',  $genre);
+        return redirect()->route('genres.index');
     }
 
     public function destroy(Genre $genre): RedirectResponse
     {
         $genre->delete();
 
-        return redirect()->route('genres.index', $genre);
+        return redirect()->route('genres.index');
     }
 }

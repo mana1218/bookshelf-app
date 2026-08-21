@@ -14,6 +14,9 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('plans:deadline-notifications')
             ->daily();
+
+        $schedule->command('plans:expire')
+            ->daily();
     }
 
     /**
