@@ -18,9 +18,6 @@
                             </option>
                         @endforeach
                         
-                        <option value="overdue" @selected($currentStatus === 'overdue')>
-                            期限切れ
-                        </option>
                     </select>
                 </form>
                 <a href="{{ route('reading-plans.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">

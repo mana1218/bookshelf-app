@@ -6,6 +6,7 @@ enum PlanStatus: string
 {
     case Reading = 'reading';
     case Completed = 'completed';
+    case Overdue = 'overdue';
 
     public function label(): string
     {
