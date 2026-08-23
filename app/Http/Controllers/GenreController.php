@@ -30,7 +30,8 @@ class GenreController extends Controller
     {
         Genre::create($request->validated());
 
-        return redirect()->route('genres.index');
+        return redirect()->route('genres.index')
+        ->with('success', 'ジャンルを登録しました。');
     }
 
     public function show(Genre $genre): View
@@ -51,13 +52,15 @@ class GenreController extends Controller
 
         $genre->update($validated);
 
-        return redirect()->route('genres.index');
+        return redirect()->route('genres.index')
+        ->with('success', 'ジャンルを更新しました。');
     }
 
     public function destroy(Genre $genre): RedirectResponse
     {
         $genre->delete();
 
-        return redirect()->route('genres.index');
+        return redirect()->route('genres.index')
+        ->with('success', 'ジャンルを削除しました。');
     }
 }
