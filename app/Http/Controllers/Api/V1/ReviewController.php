@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\ReviewResource;
+use App\Http\Resources\Api\V1\ReviewResource;
 use App\Models\Book;
 use App\Models\Review;
 use Illuminate\Http\Request;

@@ -19,8 +19,12 @@ class FavoriteController extends Controller
 
     public function toggle(Book $book)
     {
-        auth()->user()->favoriteBooks()->toggle($book->id);
-
-        return back();
+        $result = auth()->user()->favoriteBooks()->toggle($book->id);
+    
+        if (count($result['attached']) > 0) {
+            return back()->with('success', 'お気に入りに追加しました。');
+        }
+    
+        return back()->with('success', 'お気に入りから削除しました。');
     }
 }

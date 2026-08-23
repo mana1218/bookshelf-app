@@ -7,6 +7,7 @@ use App\Models\Genre;
 use App\Http\Requests\IndexBookRequest;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Http;
@@ -73,18 +74,21 @@ class BookController extends Controller
     {
         $validated = $request->validated();
 
-        $book = $request->user()->books()->create([
-            'title' => $validated['title'],
-            'author' => $validated['author'],
-            'isbn' => $validated['isbn'],
-            'published_date' => $validated['published_date'],
-            'description' => $validated['description'] ?? null,
-            'image_url' => $validated['image_url'] ?? null,
-        ]);
+        DB::transaction(function () use ($request, $validated) {
+            $book = $request->user()->books()->create([
+                'title' => $validated['title'],
+                'author' => $validated['author'],
+                'isbn' => $validated['isbn'],
+                'published_date' => $validated['published_date'],
+                'description' => $validated['description'] ?? null,
+                'image_url' => $validated['image_url'] ?? null,
+            ]);
 
-        $book->genres()->sync($validated['genres'] ?? []);
+            $book->genres()->sync($validated['genres'] ?? []);
+        });
 
-        return redirect()->route('books.index');
+        return redirect()->route('books.index')
+            ->with('success', '書籍を登録しました。');
     }
 
     public function show(Book $book): View
@@ -109,18 +113,21 @@ class BookController extends Controller
 
         $validated = $request->validated();
 
-        $book->update([
-            'title' => $validated['title'],
-            'author' => $validated['author'],
-            'isbn' => $validated['isbn'],
-            'published_date' => $validated['published_date'],
-            'description' => $validated['description'] ?? null,
-            'image_url' => $validated['image_url'] ?? null,
-        ]);
+        DB::transaction(function () use ($book, $validated) {
+            $book->update([
+                'title' => $validated['title'],
+                'author' => $validated['author'],
+                'isbn' => $validated['isbn'],
+                'published_date' => $validated['published_date'],
+                'description' => $validated['description'] ?? null,
+                'image_url' => $validated['image_url'] ?? null,
+            ]);
 
-        $book->genres()->sync($validated['genres'] ?? []);
+            $book->genres()->sync($validated['genres'] ?? []);
+        });
 
-        return redirect()->route('books.index');
+        return redirect()->route('books.index')
+            ->with('success', '書籍を更新しました。');
     }
 
     public function destroy(Book $book): RedirectResponse
@@ -129,7 +136,8 @@ class BookController extends Controller
         
         $book->delete();
 
-        return redirect()->route('books.index');
+        return redirect()->route('books.index')
+        ->with('success', '書籍を削除しました。');
     }
 
     public function isbn($isbn)

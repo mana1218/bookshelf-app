@@ -109,4 +109,22 @@ class RankingTest extends TestCase
 
         $this->assertCount(10, $rankedBooks);
     }
+    
+    public function test_api_ranking_returns_ranked_books(): void
+    {
+        $user = $this->createUser();
+
+        $lowBook = $this->createBook($user, '低評価の本');
+        $highBook = $this->createBook($user, '高評価の本');
+
+        $this->createReview($user, $lowBook, 2);
+        $this->createReview($user, $highBook, 5);
+
+        $response = $this->getJson('/api/v1/ranking');
+
+        $response->assertOk();
+
+        $response->assertJsonPath('data.0.title', '高評価の本');
+        $response->assertJsonPath('data.1.title', '低評価の本');
+    }
 }

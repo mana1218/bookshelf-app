@@ -29,10 +29,10 @@ Route::prefix('v1')->group(function () {
         Route::post('books', [BookController::class, 'store']);
         Route::put('books/{book}', [BookController::class, 'update']);
         Route::delete('books/{book}', [BookController::class, 'destroy']);
+        Route::apiResource('reviews', ReviewController::class)->only(['update', 'destroy']);
+        Route::post('books/{book}/reviews', [ReviewController::class, 'store']);
     });
     
     Route::apiResource('genres', GenreController::class);
-    Route::apiResource('reviews', ReviewController::class)->only(['update', 'destroy']);
-    Route::post('books/{book}/reviews', [ReviewController::class, 'store']);
     Route::get('ranking', [RankingController::class, 'index']);
 });
