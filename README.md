@@ -404,24 +404,24 @@ PHPUnitおよびLaravelのFeature Test・Unit Testを使用してテストを実
 最終的なテストカバレッジは 80.5% です。
 
 ## APIエンドポイント一覧
-APIのベースURLは/api/v1です。
 
-#### POST /api/v1/login APIログイン・トークン発行 認証不要
-#### GET /api/v1/books 書籍一覧取得 認証不要
-#### POST /api/v1/books 書籍登録 認証必須
-#### GET /api/v1/books/isbn/{isbn} ISBNによる書籍検索 認証不要
-#### GET /api/v1/books/{book} 書籍詳細取得 認証不要
-#### PUT /api/v1/books/{book} 書籍更新 認証必須
-#### DELETE /api/v1/books/{book} 書籍削除 認証必須
-#### POST /api/v1/books/{book}/reviews レビュー登録 認証必須
-#### GET /api/v1/genres ジャンル一覧取得 認証不要
-#### POST /api/v1/genres ジャンル登録 認証不要
-#### GET /api/v1/genres/{genre} ジャンル詳細取得 認証不要
-#### PUT / PATCH /api/v1/genres/{genre} ジャンル更新 認証不要
-#### DELETE /api/v1/genres/{genre} ジャンル削除 認証不要
-#### GET /api/v1/ranking 書籍ランキング取得 認証不要
-#### PUT / PATCH /api/v1/reviews/{review} レビュー更新 認証必須
-#### DELETE /api/v1/reviews/{review} レビュー削除 認証必須
+### APIのベースURLは/api/v1です。
+POST /api/v1/login APIログイン・トークン発行 認証不要
+GET /api/v1/books 書籍一覧取得 認証不要
+POST /api/v1/books 書籍登録 認証必須
+GET /api/v1/books/isbn/{isbn} ISBNによる書籍検索 認証不要
+GET /api/v1/books/{book} 書籍詳細取得 認証不要
+PUT /api/v1/books/{book} 書籍更新 認証必須
+DELETE /api/v1/books/{book} 書籍削除 認証必須
+POST /api/v1/books/{book}/reviews レビュー登録 認証必須
+GET /api/v1/genres ジャンル一覧取得 認証不要
+POST /api/v1/genres ジャンル登録 認証不要
+GET /api/v1/genres/{genre} ジャンル詳細取得 認証不要
+PUT / PATCH /api/v1/genres/{genre} ジャンル更新 認証不要
+DELETE /api/v1/genres/{genre} ジャンル削除 認証不要
+GET /api/v1/ranking 書籍ランキング取得 認証不要
+PUT / PATCH /api/v1/reviews/{review} レビュー更新 認証必須
+DELETE /api/v1/reviews/{review} レビュー削除 認証必須
 
 
 ## Bladeの変更
