@@ -25,9 +25,6 @@ DB_DATABASE=laravel
 DB_USERNAME=sail
 DB_PASSWORD=password
 
-#### .envの設定を変更した場合は、設定キャッシュをクリアします。
-sail artisan config:clear
-
 ### Composerパッケージのインストール
 docker run --rm \
   -u "$(id -u):$(id -g)" \
@@ -36,6 +33,9 @@ docker run --rm \
   -e COMPOSER_CACHE_DIR=/tmp/composer_cache \
   laravelsail/php82-composer:latest \
   composer install
+
+  #### .envの設定を変更した場合は、設定キャッシュをクリアします。
+sail artisan config:clear
 
 ### Laravel Sailの起動
 
